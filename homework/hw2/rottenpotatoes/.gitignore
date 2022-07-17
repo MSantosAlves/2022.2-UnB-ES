@@ -9,3 +9,6 @@ tmp/
 # bundler state
 /.bundle
 /vendor/bundle/
+
+# Byebug history
+.byebug_history

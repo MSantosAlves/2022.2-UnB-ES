@@ -1,7 +1,15 @@
 # This file is app/controllers/movies_controller.rb
 class MoviesController < ApplicationController
   def index
+    @classVariable = "hilite"
+
+    sort_key = params[:sort_by]
     @movies = Movie.all
+
+    if !sort_key.nil?
+    @movies = @movies.order(sort_key)
+    end
+    
   end
 
   def show
