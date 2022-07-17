@@ -1,13 +1,20 @@
 -#  This file is app/views/movies/index.html.haml
 %h1 All Movies
 
+= form_tag movies_path, :id => 'ratings_form', :method => :get do
+  Ratings: 
+  - @all_ratings.each do |rating|
+    = rating
+    = check_box_tag "ratings[#{rating}]", 1, @selected.include?(rating.to_s)
+  = submit_tag 'Refresh', :id => 'ratings_submit'
+
 %table#movies
   %thead
     %tr
-      %th{:class=>@classVariable} Movie Title
-      %th{:class=>@classVariable} Rating
-      %th{:class=>@classVariable} Release Date
-      %th{:class=>@classVariable} More Info
+      %th{:class=>@class_variable} Movie Title
+      %th{:class=>@class_variable} Rating
+      %th{:class=>@class_variable} Release Date
+      %th{:class=>@class_variable} More Info
   %tbody
     - @movies.each do |movie|
       %tr
