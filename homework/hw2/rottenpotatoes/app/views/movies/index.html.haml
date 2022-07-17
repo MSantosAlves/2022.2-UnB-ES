@@ -11,9 +11,9 @@
 %table#movies
   %thead
     %tr
-      %th{:class=>@class_variable} Movie Title
+      %th{:class=>@class_variable}= link_to("Movie Title", movies_path(:sort_by => "title"))
       %th{:class=>@class_variable} Rating
-      %th{:class=>@class_variable} Release Date
+      %th{:class=>@class_variable}= link_to("Release Date", movies_path(:sort_by => "release_date"))
       %th{:class=>@class_variable} More Info
   %tbody
     - @movies.each do |movie|

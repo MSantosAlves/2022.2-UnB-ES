@@ -1,18 +1,21 @@
 # This file is app/controllers/movies_controller.rb
 class MoviesController < ApplicationController
   def index
+    @class_variable = "hilite"
     @selected = []
     @all_ratings = Movie.all_ratings
     @all_ratings.each { |r| @selected.push(r) if params["ratings"] && params["ratings"][r.to_s] }
     @selected = @selected.size == 0 ? @all_ratings : @selected
     
-    @class_variable = "hilite"
-    @movies = Movie.all.select {|m| @selected.include?(m.rating) }
-    
-    sort_key = params[:sort_by]
+    sort_key = params[:sort_by] || flash[:sort_by]
+
     if !sort_key.nil?
-    @movies = @movies.order(sort_key)
+    @movies = Movie.all.order(sort_key)
+    else
+    @movies = Movie.all
     end
+    
+    @movies = @movies.select {|m| @selected.include?(m.rating) }
     
   end
 
